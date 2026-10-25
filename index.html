@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cybersecurity Training Lab</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px 14px;
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      color: #172033;
+    }
+    main {
+      max-width: 480px;
+      margin: 25px auto;
+      padding: 24px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px #0001;
+    }
+    h1 { font-size: 25px; }
+    h2 { font-size: 18px; margin-top: 25px; }
+    .notice {
+      padding: 12px;
+      background: #e8f3ff;
+      border-radius: 8px;
+      line-height: 1.5;
+    }
+    button {
+      padding: 12px 16px;
+      border: 0;
+      border-radius: 8px;
+      background: #175cd3;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    input {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0 14px;
+      border: 1px solid #bbb;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      background: #f5f6f8;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    footer {
+      margin-top: 25px;
+      color: #555;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Cybersecurity Training Lab</h1>
+  <p class="notice">
+    Educational demonstration only. This page shows what a
+    website can learn from a browser. No passwords, messages,
+    or verification codes are collected.
+  </p>
+
+  <h2>1. Browser and device details</h2>
+  <pre id="device">Loading browser details...</pre>
+
+  <h2>2. Test click counter</h2>
+  <p>Clicks during this visit: <strong id="count">0</strong></p>
+  <button id="testButton">Record test click</button>
+
+  <h2>3. Dummy training form</h2>
+  <form id="trainingForm">
+    <label for="nickname">Fictional training nickname</label>
+    <input id="nickname" maxlength="40"
+      placeholder="Example: DemoUser" required>
+    <button type="submit">Submit demo</button>
+  </form>
+  <p id="result" role="status"></p>
+
+  <footer>
+    Training demo. Form entries are processed only in this
+    browser and are not sent to a server.
+  </footer>
+</main>
+
+<script>
+  const details = {
+    browserInformation: navigator.userAgent,
+    language: navigator.language,
+    screenSize: screen.width + " x " + screen.height,
+    platform: navigator.platform || "Not provided"
+  };
+
+  document.getElementById("device").textContent =
+    "Browser information: " + details.browserInformation +
+    "\nLanguage: " + details.language +
+    "\nScreen size: " + details.screenSize +
+    "\nPlatform: " + details.platform;
+
+  let clicks = 0;
+  document.getElementById("testButton").addEventListener("click", () => {
+    clicks++;
+    document.getElementById("count").textContent = clicks;
+  });
+
+  document.getElementById("trainingForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const nickname = document.getElementById("nickname").value.trim();
+
+    if (!nickname) return;
+
+    document.getElementById("result").textContent =
+      "Demo submission successful for " + nickname +
+      ". No information was uploaded or stored on a server.";
+
+    event.target.reset();
+  });
+</script>
+</body>
+</html>
